@@ -19,4 +19,4 @@ async function addPostHandler(event){
         alert(response.statusText);
     }
 };
-document.querySelector('#add-post-form').addEventListener('submit',addPostHandler);
+document.querySelector('#add-post-form').addEventListener('submit',addPostHandler); 
