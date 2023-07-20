@@ -47,7 +47,7 @@ router.get('/login', (req, res) => {
     res.render('login');
 });
 
-//our next functjion will be to show the signup page
+//our next function will be to show the signup page
 router.get('/signup', (req, res) => {
     //we will be rendering the signup page for an account 
     res.render('signup');
@@ -92,5 +92,48 @@ router.get('/post/:id', async (req, res) => {
         res.status(500).json(err);
     }
 });
+// Function to show all posts and their comments on the posts-comments page (Note: This route seems to be identical to the '/post/:id' route)
+router.get('/posts-comments', async (req, res) => {
+    try {
+      // Fetching a specific post with the provided ID from the database, along with its associated comments and the username of users who made the comments
+      const dbPostData = await Post.findOne({
+        where: {
+          id: req.params.id,
+        },
+        attributes: ['id', 'content', 'title', 'created_at'],
+        include: [
+          {
+            model: Comment,
+            attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+            include: {
+              model: User,
+              attributes: ['username'],
+            },
+          },
+          {
+            model: User,
+            attributes: ['username'],
+          },
+        ],
+      });
+  
+      // If the specified post does not exist in the database, sending a 404 not found response
+      if (!dbPostData) {
+        res.status(404).json({ message: 'No post found with this id' });
+        return;
+      }
+  
+      // Converting the post data into a plain JavaScript object for easy usage
+      const post = dbPostData.get({ plain: true });
+  
+      // Rendering the 'posts-comments' template with the retrieved post data
+      res.render('posts-comments', { post, loggedIn: req.session.loggedIn });
+    } catch (err) {
+      // If an error occurs while fetching data from the database, logging the error and sending a 500 server error response
+      console.log(err);
+      res.status(500).json(err);
+    }
+  });
+
 
 module.exports = router;
