@@ -21,4 +21,3 @@ if (process.env.JAWSDB_URL) {
 }
 //we will be exporting the sequelize
 module.exports = sequelize;
-//test
