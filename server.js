@@ -16,8 +16,8 @@ const PORT = process.env.PORT || 3001;
 
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-const session = {
-    secret: 'Super secret secret',
+const expSession = {
+    secret: 'Super password',
     cookie: { maxAge: 3600 },
     resize: false,
     saveUninitialized: true,
@@ -26,7 +26,7 @@ const session = {
     })
 };
 //here we are adding the session to our server
-app.use(session(sess));
+app.use(session(expSession));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
