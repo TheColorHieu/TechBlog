@@ -19,4 +19,4 @@ async function deletePostHandler(event){
         alert(response.statusText);
     }
 }
-document.querySelector('#delete-post-btn').addEventListener('click',deletePostHandler);
+document.querySelector('.delete-post-btn').addEventListener('click',deletePostHandler);
