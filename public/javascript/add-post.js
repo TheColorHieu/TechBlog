@@ -2,11 +2,11 @@
 async function addPostHandler(event){
     event.preventDefault();
 
-    const title = document.querySelector('#post-title').value;
-    const content = document.querySelector('#post-content').value;
+    const title = document.querySelector('input[name="post-title"]').value;
+    const content = document.querySelector('input[name="content"]').value;
     //here we are adding a conditional statement to check if the title and content are not empty
     const response = await fetch('/api/posts',{
-        method: 'post',
+        method: 'POST',
         body: JSON.stringify({
             title,
             content
@@ -19,4 +19,4 @@ async function addPostHandler(event){
         alert(response.statusText);
     }
 };
-document.querySelector('#add-post-form').addEventListener('submit',addPostHandler); 
+document.querySelector('#new-post-form').addEventListener('submit',newFormHandler); 

@@ -7,7 +7,7 @@ async function loginFormHandler(event){
     //here we are adding a conditional statement to check if the username and password are not empty
     if(username && password){
         const response = await fetch('/api/users/login',{
-            method: 'post',
+            method: 'POST',
             body: JSON.stringify({
                 username,
                 password

@@ -2,14 +2,14 @@
 async function commentFormHandler(event){
     event.preventDefault();
 
-    const comment_text = document.querySelector('#comment-text').value.trim();
+    const comment_text = document.querySelector('input[name="comment-text"]').value.trim();
     const post_id = window.location.toString().split('/')[
         window.location.toString().split('/').length-1
     ];
     //here we are adding a conditional statement to check if the comment_text is not empty
     if(comment_text){
         const response = await fetch('/api/comments',{
-            method: 'post',
+            method: 'POST',
             body: JSON.stringify({
                 post_id,
                 comment_text
@@ -21,6 +21,7 @@ async function commentFormHandler(event){
             document.location.reload();
         }else{
             alert(response.statusText);
+            document.querySelector('#comment-form').style.display = 'block';
         }
     }
 }
