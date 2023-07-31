@@ -15,10 +15,11 @@ async function signupFormHandler(event) {
         });
         //here we are adding a conditional statement to check if the response is ok
         if(response.ok){
-            console.log('success');
-        //loginhandler()
-            document.location.replace('/dashboard');
+            console.log('Signup success');
+        loginFormHandler()
+            document.location.replace('/login');
         }else{
+            const errorMessage = await response.json();
             alert(response.statusText);
         }
     }

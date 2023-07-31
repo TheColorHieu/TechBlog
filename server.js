@@ -10,6 +10,7 @@ const exphbs = require('express-handlebars');
 const hbs= exphbs.create({ helpers });
 //we will be adding session
 const session = require('express-session');
+const e = require('express');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -29,7 +30,8 @@ const expSession = {
 app.use(session(expSession));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public',express.static(path.join(__dirname, 'public')));
+
 
 //we will be adding handlebars to our server
 app.engine('handlebars',hbs.engine);

@@ -2,6 +2,7 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Post, User, Comment } = require('../models');
+const withAuth = require('../utils/auth');
 
 //here we are getting all the posts for the homepage
 //we are creating a function that will get all the posts for the homepage
@@ -40,7 +41,7 @@ router.get('/', async (req, res) => {
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
         //if the user is already logged in we will be redirecting the user to the homepage
-        res.redirect('/');
+        res.redirect('/dashboard');
         return;
     }
     //if the user is not logged in we will be rendering the login page
